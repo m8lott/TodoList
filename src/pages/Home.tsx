@@ -26,7 +26,7 @@ const Home: FC = () => {
   useEffect(() => {
     const newList = localStorage.getItem("tasks");
     const newListParse = JSON.parse(newList!);
-    dispatch(updateTasks(newListParse));
+    dispatch(updateTasks(newListParse === null ? tasks : newListParse));
   }, []);
 
   return (

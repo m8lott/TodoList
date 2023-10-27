@@ -10,13 +10,17 @@ interface initialState {
 const todosSlice = createSlice({
   name: "todos",
   initialState: {
-    tasks: [],
+    tasks: [{id: Date.now(),
+      title: 'First task',
+      favorite: false,
+      checked: false,
+      edit: false,}],
     addFormToggle: false,
     editToggle: false,
   } as initialState,
   reducers: {
     addTasks: (state, action) => {
-      state?.tasks?.push({
+      state.tasks.push({
         id: Date.now(),
         title: action.payload,
         favorite: false,
@@ -26,7 +30,7 @@ const todosSlice = createSlice({
       localStorage.setItem("tasks", JSON.stringify(state.tasks));
     },
     editTask: (state, action) => {
-      state?.tasks?.map((task) => {
+      state.tasks.map((task) => {
         if (task.id === action.payload.id) task.title = action.payload.title;
       });
       localStorage.setItem("tasks", JSON.stringify(state.tasks));
